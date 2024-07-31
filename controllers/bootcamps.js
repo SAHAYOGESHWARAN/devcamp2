@@ -122,5 +122,9 @@ exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
         }
     });
 
-   
+    res.status(200).json({
+        success: true,
+        count: bootcamps.length,
+        data: bootcamps
+    });
 });

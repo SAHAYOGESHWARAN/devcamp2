@@ -1,6 +1,6 @@
 const ErrorResponse = require('../utils/ErrorResponse');
 const asyncHandler = require('../middleware/async');
-const geocoder = require('../utils/geocoder'); // Corrected typo
+const { geocode } = require('../utils/geocoder');
 const Bootcamp = require('../models/Bootcamp');
 
 // @desc    Get all bootcamps
@@ -68,9 +68,9 @@ exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
     const { zipcode, distance } = req.params;
 
     // Get lat/lng from geocoder
-    const loc = await geocoder.geocode(zipcode);
-    const lat = loc[0].latitude;
-    const lng = loc[0].longitude;
+    const loc = await geocode(zipcode);
+    const lat = loc.latitude;
+    const lng = loc.longitude;
 
     // Calculate radius using radians
     // Divide distance by radius of Earth

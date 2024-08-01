@@ -1,6 +1,6 @@
 const ErrorResponse = require('../utils/ErrorResponse');
 const asyncHandler = require('../middleware/async');
-const Course = require('../models/Course.');
+const Course = require('./models/Course');
 
 // @desc    Get courses
 // @route   GET /api/v1/bootcamps/:bootcampId/courses

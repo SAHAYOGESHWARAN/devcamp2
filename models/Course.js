@@ -9,7 +9,7 @@ const CourseSchema = new mongoose.Schema({
   description:{
     type: String,
     required:[true,'please add description']
-  }
+  },
   weeks:{
     type: String,
     required:[true,'please add number of weeks']
@@ -22,5 +22,9 @@ const CourseSchema = new mongoose.Schema({
     type: String,
     required:[true,'please add minimum skil'],
     enum:['beginner','intermediate','advanced']
-  }
+  },
+ scholarshipAvailable:{
+    type: String,
+    required:[true,'please add minimum skil'],
+  },
 });

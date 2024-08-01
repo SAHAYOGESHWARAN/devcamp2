@@ -13,7 +13,7 @@ connectDB();
 
 // Route files
 const bootcamps = require('./routes/bootcamp');
-
+const courses = require('./routes/courses');
 const app = express();
 
 // Body parser
@@ -29,7 +29,7 @@ app.use(logger); // Use the logger middleware
 
 // Mount routers
 app.use('/api/v1/bootcamps', bootcamps);
-
+app.use('/api/v1/courses', courses);
 // Error handler
 app.use(errorHandler);
 

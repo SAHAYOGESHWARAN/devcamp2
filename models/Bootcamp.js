@@ -5,7 +5,7 @@ const geocoder = require('../utils/geocoder');
 const BootcampSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Please add a name'],
+        required: [false, 'Please add a name'],
         unique: true,
         trim: true,
         maxlength: [50, 'Name can not be more than 50 characters']
@@ -13,7 +13,7 @@ const BootcampSchema = new mongoose.Schema({
     slug: String,
     description: {
         type: String,
-        required: [true, 'Please add a description'],
+        required: [false, 'Please add a description'],
         maxlength: [500, 'Description can not be more than 500 characters']
     },
     website: {
@@ -32,18 +32,18 @@ const BootcampSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        required: [true, 'Please add an address']
+        required: [false, 'Please add an address']
     },
     location: {
         // GeoJSON Point
         type: {
             type: String,
             enum: ['Point'],
-            required: true
+            required: false
         },
         coordinates: {
             type: [Number],
-            required: true,
+            required: false,
             index: '2dsphere'
         },
         formattedAddress: String,
@@ -105,7 +105,7 @@ const BootcampSchema = new mongoose.Schema({
 // Create bootcamp slug from the name
 BootcampSchema.pre('save', async function(next) {
     // Create slug
-    this.slug = slugify(this.name, { lower: true });
+    //this.slug = slugify(this.name, { lower: true });
 
     // Geocode & create location field
     const loc = await geocoder.geocode(this.address);

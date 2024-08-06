@@ -2,14 +2,15 @@ const express = require('express');
 const {
     getCourses,
     getCourse,
-    addCourse,
-    updateCourse,
-    deleteCourse
+    addCourse
 } = require('../controllers/courses');
 
-const router = express.Router({ mergeParams: true });  // This is important to allow nested routes
+const router = express.Router();
 
-router.route('/').get(getCourses).post(addCourse);
-router.route('/:id').get(getCourse).put(updateCourse).delete(deleteCourse);
+// Route to get all courses
+router.route('/').get(getCourses);
+
+// Route to get a single course by id
+router.route('/:id').get(getCourse);
 
 module.exports = router;

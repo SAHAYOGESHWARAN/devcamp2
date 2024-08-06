@@ -5,7 +5,7 @@ const {
     addCourse
 } = require('../controllers/courses');
 
-const router = express.Router({mergeparams: true});
+const router = express.Router({mergeParams: true});
 
 
 router.route('/:id')

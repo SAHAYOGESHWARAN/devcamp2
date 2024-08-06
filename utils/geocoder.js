@@ -16,9 +16,9 @@ const geocode = async (address) => {
 
         const location = response.data.results[0].locations[0];
         return {
-            latitude: location.latLng.lat,
-            longitude: location.latLng.lng,
-            formattedAddress: `${location.street}, ${location.adminArea5}, ${location.adminArea3}, ${location.postalCode}, ${location.adminArea1}`
+          //  latitude: location.latLng.lat,
+          //  longitude: location.latLng.lng,
+          //  formattedAddress: `${location.street}, ${location.adminArea5}, ${location.adminArea3}, ${location.postalCode}, ${location.adminArea1}`
         };
     } catch (error) {
         throw new ErrorResponse(error.message, error.response ? error.response.status : 500);

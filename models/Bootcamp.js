@@ -102,32 +102,32 @@ const BootcampSchema = new mongoose.Schema({
     }
 });
 
-// Create bootcamp slug from the name
-BootcampSchema.pre('save', async function(next) {
-    // Create slug
-    //this.slug = slugify(this.name, { lower: true });
+// // Create bootcamp slug from the name
+// BootcampSchema.pre('save', async function(next) {
+//     // Create slug
+//     //this.slug = slugify(this.name, { lower: true });
 
-    // Geocode & create location field
-    const loc = await geocoder.geocode(this.address);
-    if (loc.length > 0) {
-        this.location = {
-            type: 'Point',
-            coordinates: [loc[0].longitude, loc[0].latitude],
-            formattedAddress: loc[0].formattedAddress,
-            street: loc[0].streetName,  // Assuming correct field names
-            city: loc[0].city,
-            state: loc[0].stateCode,
-            zipcode: loc[0].zipcode,
-            country: loc[0].countryCode
-        };
-    } else {
-        this.location = undefined;
-    }
+//     // Geocode & create location field
+//     const loc = await geocoder.geocode(this.address);
+//     if (loc.length > 0) {
+//         this.location = {
+//             type: 'Point',
+//             coordinates: [loc[0].longitude, loc[0].latitude],
+//             formattedAddress: loc[0].formattedAddress,
+//             street: loc[0].streetName,  // Assuming correct field names
+//             city: loc[0].city,
+//             state: loc[0].stateCode,
+//             zipcode: loc[0].zipcode,
+//             country: loc[0].countryCode
+//         };
+//     } else {
+//         this.location = undefined;
+//     }
 
-    // Do not save address in DB
-    this.address = undefined;
+//     // Do not save address in DB
+//     this.address = undefined;
 
-    next();
-});
+//     next();
+// });
 
 module.exports = mongoose.model('Bootcamp', BootcampSchema);

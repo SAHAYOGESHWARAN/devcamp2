@@ -1,4 +1,4 @@
-//const ErrorResponse = require('../utils/errorResponse');
+const ErrorResponse = require('../utils/errorResponse'); // Ensure this is properly imported
 const asyncHandler = require('../middleware/async');
 const Course = require('../models/Course');
 const Bootcamp = require('../models/Bootcamp');
@@ -104,8 +104,6 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
     new: true,
     runValidators: true
   });
-
-  course.save();
 
   res.status(200).json({
     success: true,

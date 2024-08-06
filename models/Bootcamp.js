@@ -5,7 +5,7 @@ const geocoder = require('../utils/geocoder');
 const BootcampSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Please add a name'],  // Set required to true
+        required: [true, 'Please add a name'],
         unique: true,
         trim: true,
         maxlength: [50, 'Name can not be more than 50 characters']
@@ -13,7 +13,7 @@ const BootcampSchema = new mongoose.Schema({
     slug: String,
     description: {
         type: String,
-        required: [true, 'Please add a description'],  // Set required to true
+        required: [true, 'Please add a description'],
         maxlength: [500, 'Description can not be more than 500 characters']
     },
     website: {
@@ -32,10 +32,9 @@ const BootcampSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        required: [true, 'Please add an address']  // Set required to true
+        required: [true, 'Please add an address']
     },
     location: {
-        // GeoJSON Point
         type: {
             type: String,
             enum: ['Point'],
@@ -54,7 +53,6 @@ const BootcampSchema = new mongoose.Schema({
         country: String
     },
     careers: {
-        // Array of strings
         type: [String],
         required: true,
         enum: [
@@ -134,19 +132,19 @@ BootcampSchema.pre('save', async function(next) {
     next();
 });
 
-// cascade delete course when a bootcamp is deleted 
+// Cascade delete courses when a bootcamp is deleted 
 BootcampSchema.pre('remove', async function(next) { 
-    console.log('Courses begin removed from bootcamp ${this._id}');
-    await this.model('Course').deleteMany({bootcamp: this._id});
+    console.log(`Courses being removed from bootcamp ${this._id}`);
+    await this.model('Course').deleteMany({ bootcamp: this._id });
     next();
 });
 
 // Reverse populate with virtuals
-BootcampSchema.virtual('courses',{
-    ref:'Course',
-    localField:'_id',
-    foreignField:'bootcamp',
-    justOne:false
+BootcampSchema.virtual('courses', {
+    ref: 'Course',
+    localField: '_id',
+    foreignField: 'bootcamp',
+    justOne: false
 });
 
 module.exports = mongoose.model('Bootcamp', BootcampSchema);

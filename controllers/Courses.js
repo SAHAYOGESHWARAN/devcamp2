@@ -23,3 +23,17 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
         data: courses
     });
 });
+
+// Dummy functions for demonstration purposes
+const getCourses = (req, res, next) => {
+    res.status(200).json({ success: true, msg: 'Show all courses' });
+};
+
+const getCourse = (req, res, next) => {
+    res.status(200).json({ success: true, msg: `Show course ${req.params.id}` });
+};
+
+module.exports = {
+    getCourses,
+    getCourse
+};

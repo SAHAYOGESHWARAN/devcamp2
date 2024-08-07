@@ -1,4 +1,4 @@
-const ErrorResponse = require('../utils/ErrorResponse'); // Ensure this is properly imported
+const ErrorResponse = require('../utils/ErrorResponse');
 const asyncHandler = require('../middleware/async');
 const Course = require('../models/Course');
 const Bootcamp = require('../models/Bootcamp');
@@ -46,7 +46,6 @@ exports.getCourse = asyncHandler(async (req, res, next) => {
 // @route     POST /api/v1/bootcamps/:bootcampId/courses
 // @access    Private
 exports.addCourse = asyncHandler(async (req, res, next) => {
-    console.log("{}{}{} ADD COURSES")
   req.body.bootcamp = req.params.bootcampId;
   req.body.user = req.user.id;
 
@@ -105,6 +104,8 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
     new: true,
     runValidators: true
   });
+
+  course.save();
 
   res.status(200).json({
     success: true,

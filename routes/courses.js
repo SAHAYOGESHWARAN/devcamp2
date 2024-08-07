@@ -1,16 +1,23 @@
 const express = require('express');
 const {
-    getCourses,
-    getCourse,
-    addCourse
+  getCourses,
+  getCourse,
+  addCourse,
+  updateCourse,
+  deleteCourse
 } = require('../controllers/courses');
 
-const router = express.Router();
+const Course = require('../models/Course');
 
-// Route to get all courses
-router.route('/').get(getCourses);
+const router = express.Router({ mergeParams: true });
 
-// Route to get a single course by id
-router.route('/:id').get(getCourse);
+
+router
+  .post(('publisher', ''), addCourse);
+router
+  .route('/:id')
+  .get(getCourse)
+  .put(protect, authorize('publisher', 'admin'), updateCourse)
+  .delete(protect, authorize('publisher', 'admin'), deleteCourse);
 
 module.exports = router;
